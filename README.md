@@ -15,9 +15,14 @@ Arrays are ordered by index; sets hold unique values; dictionaries hold unique k
 
 ### Generic Collections
 
-Since Swift is a strongly-typed language, its collection types are also "typed", meaning that they are given knowledge regarding their contents. Apple notes that its Array, Set, and Dictionary types "are implemented as *generic collections*."
+Since Swift is a strongly-typed language, its collection types are also "typed", meaning that they are given knowledge regarding their contents. Apple notes in the [*Collection Types* chapter](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-ID105) that its `Array`, `Set`, and `Dictionary` types "are implemented as *generic collections*."
 
-References to the keyword `Element` (or the archaic `T` from Swift 1) denote a *generic*. We'll discuss generics in further detail in upcoming lessons. In a nutshell, a generic is a placeholder for **any** type. The effect of this is that the compiler gives individual instances of these collections knowledge of their membership types when they are declared, but otherwise the collection types themselves work exactly the same way whether they are told that they hold `Int`s, or `String`s, or anything else.
+References to the keywords `T` or `Element` denote a *generic*:
+
+  * `T` is a placeholder for a **Type**, while
+  * `Element` is a placeholder for an **instance** of the designated type.
+
+We'll discuss generics in further detail in upcoming lessons. The effect of this is that the compiler gives individual instances of these collections knowledge of their membership types when they are declared, but otherwise the collection types themselves work exactly the same way whether they are told that they hold `Int`s, or `String`s, or anything else.
 
 ### `let` versus `var`
 
@@ -25,7 +30,7 @@ Collections declared using `let` are *immutable* and cannot be altered at all af
 
 ### Pass-by-value
 
-Swift's collections types are passed by *value* and not by *reference*. When a collection instance is assigned to another collection instance, a copy of the instance is generated and assigned to the new instance. The effect of this is important to understand: **changes made to a collection after it passed are not reflected in the state of the original collection.**
+Swift's collections types are passed by *value* and not by *reference*. When a collection instance is assigned to another collection instance, a copy of the instance is generated and assigned to the new instance. The effect of this is important to understand: **changes made to a collection after it is passed are not reflected in the state of the original collection.**
 
 This is true both for local instances and instances passed into functions and methods via arguments. *If you wish to preserve the mutated state of an instance that is passed-by-value, you have to assign the mutated version back to the original instance.*
 
@@ -161,5 +166,40 @@ let karmaByName: [String: Int] = ["Joe":53, "Tim":13, "Jim":9, "Tom":9, "Mark":8
 let primeSqrts: [Int: Double] = [1:1, 2:1.414, 3:1.732, 5:2.236, 7:2.646, 11:3.317]
 ```
 
+To improve readability when declaring a large dictionary, you can write each key-value pair on its own line, indented like this:
 
-### Tuples
+```swift
+let jenny: [String: String] = [
+    "first name": "Jenny",
+    "relationship": "Friend",
+    "phone number": "(555) 867-5309",
+    "email address": "jenny@email.com",
+    "physical address": "123 Street Name",
+    "city state": "Anywhere, USA",
+    "zip code": "00409"
+]
+```
+
+### Reading a Dictionary
+
+Similar to arrays, dictionaries can be subscripted with a key. This syntax returns an *optional* that will contain `nil` if the dictionary holds no value for the requested key:
+
+```swift
+if let jennysPhoneNumber = jenny["phone number"] {
+    print(jennysPhoneNumber)
+}
+```
+This will print: `(555) 867-5309`.
+
+```swift
+if let jennysFavoriteShrimpDish = jenny["favorite shrimp dish"] {
+    print(jennysFavoriteShrimpDish)
+} else {
+    print("Jenny doesn't like shrimp.")
+}
+```
+This will print: `Jenny doesn't like shrimp.` because requesting a value for a non-existent key returns `nil`.
+
+### Looping Over Dictionaries
+
+#### Tuples
