@@ -2,6 +2,16 @@
 
 ## Objectives
 
+1. Understand Swift collection types as generic collections.
+2. Recognize some implications of the pass-by-value nature of Swift collections.
+3. Create an explicitly-typed array.
+4. Use subscripting to interact with an array.
+5. Use a few array methods and properties to interact with an array.
+6. Create an explicitly-typed dictionary.
+7. Use subscripting to read a dictionary.
+8. Use subscripting to overwrite or add values for a key in a dictionary.
+9. Use the key-value Tuple returned by iterating over a dictionary with a `for-in` loop.
+
 ## Collections
 
 Apple's summary of the conceptual differences between Swift's three collection types is quite perfect:
@@ -149,7 +159,7 @@ Sets have use cases that we're not going to discuss at this time. For now, just 
 
 ## `Dictionary`
 
-### Type Annotation
+### Creating a Dictionary
 
 To explicitly declare the types of an empty dictionary, wrap the types of the key and value in square brackets `[` `]` but separated by a colon (`:`). You can use either type annotation to set it equal to an empty bracket-and-colon set, or the initializer syntax that uses a parenthesis following the dictionary type:
 
@@ -200,6 +210,124 @@ if let jennysFavoriteShrimpDish = jenny["favorite shrimp dish"] {
 ```
 This will print: `Jenny doesn't like shrimp.` because requesting a value for a non-existent key returns `nil`.
 
+### Writing to a Dictionary
+
+To alter a dictionary by adding a new key-value pair, or overwriting the value of an existing key, the dictionary must be *mutable*, meaning that it must have been created using `var`:
+
+```swift
+var jenny: [String: String] = [
+    "first name": "Jenny",
+    "relationship": "Friend",
+    "phone number": "(555) 867-5309",
+    "email address": "jenny@email.com",
+    "physical address": "123 Street Name",
+    "city state": "Anywhere, USA",
+    "zip code": "00409"
+]
+```
+We can the subscript the dictionary on the *left* side of an assignment operator in order to write to it:
+
+```swift
+jenny["relationship"] = "It's Complicated"     // overwrites an existing value
+
+jenny["favorite shrimp dish"] = "Shrimp Gumbo" // creates a new key-value pair
+```
+Since keys must remain unique, writing to an existing key does not duplicate it, but rather replaces (or "overwrites") the previous value with a new value.
+
+### Removing from a Dictionary
+
+Swift dictionaries have a nice feature that if you set an existing key's value to `nil`, it will remove the key from the dictionary since it no longer has an associated value:
+
+```swift
+jenny["first name"] = nil
+jenny["relationship"] = nil
+jenny["phone number"] = nil
+jenny["email address"] = nil
+jenny["physical address"] = nil
+jenny["city state"] = nil
+jenny["zip code"] = nil
+jenny["favorite shrimp dish"] = nil
+
+print(jenny)
+```
+This will print: `[:]` meaning an empty dictionary.
+
 ### Looping Over Dictionaries
 
-#### Tuples
+To iterate over every key-value pair in a dictionary, a `for-in` loop can be used with the following syntax:
+
+```swift
+for (key, value) in dictionary {
+    // statements
+}
+```
+The component that reads `(key, value)` is called a Tuple. In this case, the Tuple contains elements for the `key` and `value` of an associated pair in the dictionary. (**Advanced:** *This Tuple is actually a struct named* `DictionaryIndex`.)
+However you name these elements in the `for-in` loop's declaration line is how the instances will be accessible within the loop's body.
+
+So while `key` and `value` might be appropriate for the `jenny` dictionary:
+
+```swift
+for (key, value) in jenny {
+    print("Jenny's \(key) is \(value).")
+}
+```
+Which will print (assuming we haven't emptied the dictionary), in some order:
+
+```
+Jenny's favorite shrimp dish is Shrimp Gumbo.
+Jenny's phone number is (555) 867-5309.
+Jenny's first name is Jenny.
+Jenny's physical address is 123 Street Name.
+Jenny's city state is Anywhere, USA.
+Jenny's zip code is 00409.
+Jenny's email address is jenny@email.com.
+Jenny's relationship is It's Complicated.
+```
+However, we can also choose to use more specific names for the elements to improve clarity:
+
+```swift
+let karmaByName: [String: Int] = ["Joe":53, "Tim":13, "Jim":9, "Tom":9, "Mark":8]
+
+for (name, karma) in karmaByName {
+    print("\(name) has \(karma) karma.")
+}
+```
+Which will print, in some order:
+
+```
+Jim has 9 karma.
+Tim has 13 karma.
+Joe has 53 karma.
+Tom has 9 karma.
+Mark has 8 karma.
+```
+And also:
+
+```swift
+let primeSqrts: [Int: Double] = [1:1, 2:1.414, 3:1.732, 5:2.236, 7:2.646, 11:3.317]
+
+for (prime, sqrt) in primeSqrts {
+    print("The square root of the prime number \(prime) is approximately \(sqrt)")
+}
+```
+Which will print, in some order:
+
+```
+The square root of the prime number 7 is approximately 2.646
+The square root of the prime number 2 is approximately 1.414
+The square root of the prime number 3 is approximately 1.732
+The square root of the prime number 1 is approximately 1.0
+The square root of the prime number 11 is approximately 3.317
+```
+
+### Useful Properties
+
+Swift dictionaries have a couple intuitive properties:
+
+#### `.count`
+
+Holds an `Int` value of the number of key-value pairs currently held in the dictionary.
+
+#### `.isEmpty`
+
+Holds a `Bool` of whether or not the dictionary is empty; it returns `true` if the `count` is `0`("zero").
