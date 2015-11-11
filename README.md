@@ -27,10 +27,7 @@ Arrays are ordered by index; sets hold unique values; dictionaries hold unique k
 
 Since Swift is a strongly-typed language, its collection types are also "typed", meaning that they are given knowledge regarding their contents. Apple notes in the [*Collection Types* chapter](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-ID105) that its `Array`, `Set`, and `Dictionary` types "are implemented as *generic collections*."
 
-References to the keywords `T` or `Element` denote a *generic*:
-
-  * `T` is a placeholder for a **Type**, while
-  * `Element` is a placeholder for an **instance** of the designated type.
+Uses of the keywords `T`, `Element`, and `Item` denote a *generic*. There is no meaningful distinction between the terms and you will see all three of them in various documents, both from Apple and from answers and blogs written by outside developers.
 
 We'll discuss generics in further detail in upcoming lessons. The effect of this is that the compiler gives individual instances of these collections knowledge of their membership types when they are declared, but otherwise the collection types themselves work exactly the same way whether they are told that they hold `Int`s, or `String`s, or anything else.
 
