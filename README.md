@@ -125,7 +125,7 @@ To iterate over an array without needing the index number, use a `for` loop:
 
 ```swift
 for Element in Array {
-    // statments
+    // statements
 }
 ```
 
