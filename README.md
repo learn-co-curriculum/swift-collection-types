@@ -222,7 +222,7 @@ var jenny: [String: String] = [
     "zip code": "00409"
 ]
 ```
-We can the subscript the dictionary on the *left* side of an assignment operator in order to write to it:
+We can then subscript the dictionary on the *left* side of an assignment operator in order to write to it:
 
 ```swift
 jenny["relationship"] = "It's Complicated"     // overwrites an existing value
