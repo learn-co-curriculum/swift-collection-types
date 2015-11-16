@@ -48,9 +48,9 @@ This is true both for local instances and instances passed into functions and me
 To explicitly declare the type of an empty array, wrap the type within square brackets `[` `]`. You can use either type annotation to set it equal to empty square brackets, or the initializer syntax that uses a parenthesis following the array type:
 
 ```swift
-let array: [Element] = []      // type annotation
-let array: array<Element> = [] // long form annotation
-let array = [Element]()        // initializer
+let array: [Type] = []      // type annotation
+let array: array<Type> = [] // long form annotation
+let array = [Type]()        // initializer
 ```
 
 To explicitly declare an array with contents, the contents must match the annotated type.
