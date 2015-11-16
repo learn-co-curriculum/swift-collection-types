@@ -29,7 +29,7 @@ Since Swift is a strongly-typed language, its collection types are also "typed",
 
 Uses of the keywords `T`, `Element`, and `Item` denote a *generic*. There is no meaningful distinction between the terms and you will see all three of them in various documents, both from Apple and from answers and blogs written by outside developers.
 
-We'll discuss generics in further detail in upcoming lessons. The effect of this is that the compiler gives individual instances of these collections knowledge of their membership types when they are declared, but otherwise the collection types themselves work exactly the same way whether they are told that they hold `Int`s, or `String`s, or anything else.
+We'll discuss generics in further detail in upcoming lessons. The effect of this is that the compiler knows the types that each individual instance of a collection contains, but otherwise the collection types themselves work in exactly the same ways whether they are told that they hold `Int`s, or `String`s, or anything else.
 
 ### `let` versus `var`
 
@@ -83,8 +83,10 @@ Tim
 // setting, only for arrays declared with var
 
 instructors[2] = "Jim Campagno"
-primes[5] = 13   // error
+primes[5] = 13   // mutability error
 ```
+![](https://curriculum-content.s3.amazonaws.com/swift/swift-collection-types/array_subscripting__mutability_error.png)
+
 ### Methods
 
 #### `.append()`
@@ -93,9 +95,10 @@ You can add to mutable array using the `.append()` method with the element to ad
 
 ```swift
 instructors.append("Mark")
-instructors.append(42)   // error
-primes.append(13)  // error
+instructors.append(42)   // type error
+primes.append(13)  // mutability error
 ```
+![](https://curriculum-content.s3.amazonaws.com/swift/swift-collection-types/array_append_errors.png)
 
 #### `.removeLast()`
 
@@ -125,14 +128,14 @@ To iterate over an array without needing the index number, use a `for` loop:
 
 ```swift
 for Element in Array {
-    // statments
+    // statements
 }
 ```
 
 An implementation of this might look like:
 
 ```swift
-let instructors: [String] = ["Joe", "Tim", "Jim", "Tom", "Mark"]
+let instructors = ["Joe", "Tim", "Jim", "Tom", "Mark"]
 
 for instructor in instructors {
     print("Good morning, \(instructor)!")
@@ -161,16 +164,16 @@ Sets have use cases that we're not going to discuss at this time. For now, just 
 To explicitly declare the types of an empty dictionary, wrap the types of the key and value in square brackets `[` `]` but separated by a colon (`:`). You can use either type annotation to set it equal to an empty bracket-and-colon set, or the initializer syntax that uses a parenthesis following the dictionary type:
 
 ```swift
-let dictionary: [Key: Value] = [:]           // type annotation
-let dictionary: Dictionary<Key, Value> = [:] // long form annotation
-let dictionary = [Key: Value]()              // initializer
+let dictionary: [KeyType: ValueType] = [:]           // type annotation
+let dictionary: Dictionary<KeyType, ValueType> = [:] // long form annotation
+let dictionary = [KeyType: ValueType]()              // initializer
 ```
 
 To explicitly declare a dictionary with contents, the contents must match the annotated key-value types.
 
 ```swift
-let karmaByName: [String: Int] = ["Joe":53, "Tim":13, "Jim":9, "Tom":9, "Mark":8]
-let primeSqrts: [Int: Double] = [1:1, 2:1.414, 3:1.732, 5:2.236, 7:2.646, 11:3.317]
+let karmaByName: [String: Int] = ["Joe": 53, "Tim": 13, "Jim": 9, "Tom": 9, "Mark": 8]
+let primeSqrts: [Int: Double] = [1: 1, 2: 1.414, 3: 1.732, 5: 2.236, 7: 2.646, 11: 3.317]
 ```
 
 To improve readability when declaring a large dictionary, you can write each key-value pair on its own line, indented like this:
