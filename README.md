@@ -49,7 +49,7 @@ To explicitly declare the type of an empty array, wrap the type within square br
 
 ```swift
 let array: [Type] = []      // type annotation
-let array: array<Type> = [] // long form annotation
+let array: Array<Type> = [] // long form annotation
 let array = [Type]()        // initializer
 ```
 
@@ -261,7 +261,7 @@ for (key, value) in dictionary {
     // statements
 }
 ```
-The component that reads `(key, value)` is called a Tuple. In this case, the Tuple contains elements for the `key` and `value` of an associated pair in the dictionary. (**Advanced:** *This Tuple is actually a struct named* `DictionaryIndex`.)
+The component that reads `(key, value)` is called a Tuple. In this case, the Tuple contains elements for the `key` and `value` of an associated pair in the dictionary.
 However you name these elements in the `for-in` loop's declaration line is how the instances will be accessible within the loop's body.
 
 So while `key` and `value` might be appropriate for the `jenny` dictionary:
