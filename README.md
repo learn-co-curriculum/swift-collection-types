@@ -331,5 +331,3 @@ Holds an `Int` value of the number of key-value pairs currently held in the dict
 #### `.isEmpty`
 
 Holds a `Bool` of whether or not the dictionary is empty; it returns `true` if the `count` is `0`("zero").
-
-<a href='https://learn.co/lessons/swift-collection-types' data-visibility='hidden'>View this lesson on Learn.co</a>
