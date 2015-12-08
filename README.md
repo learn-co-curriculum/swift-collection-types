@@ -91,7 +91,7 @@ primes[5] = 13   // mutability error
 
 #### `.append()`
 
-You can add to mutable array using the `.append()` method with the element to add placed inside the parenthesis. The element must match the array's type.
+You can add to a mutable array using the `.append()` method with the element to add placed inside the parenthesis. The element must match the array's type.
 
 ```swift
 instructors.append("Mark")
