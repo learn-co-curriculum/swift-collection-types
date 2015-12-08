@@ -91,7 +91,7 @@ primes[5] = 13   // mutability error
 
 #### `.append()`
 
-You can add to mutable array using the `.append()` method with the element to add placed inside the parenthesis. The element must match the array's type.
+You can add to a mutable array using the `.append()` method with the element to add placed inside the parenthesis. The element must match the array's type.
 
 ```swift
 instructors.append("Mark")
@@ -331,5 +331,3 @@ Holds an `Int` value of the number of key-value pairs currently held in the dict
 #### `.isEmpty`
 
 Holds a `Bool` of whether or not the dictionary is empty; it returns `true` if the `count` is `0`("zero").
-
-<a href='https://learn.co/lessons/swift-collection-types' data-visibility='hidden'>View this lesson on Learn.co</a>
