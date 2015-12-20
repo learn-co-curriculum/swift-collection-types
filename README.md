@@ -122,7 +122,7 @@ The `.first` and `.last` are properties which return on optional containing the 
 
 Arrays have a `count` property which returns an `Int` count of the number of elements currently in its membership.
 
-### Arrays with Loops
+### Arrays + Loops
 
 To iterate over an array without needing the index number, use a `for` loop:
 
