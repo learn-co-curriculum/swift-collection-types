@@ -124,7 +124,7 @@ Arrays have a `count` property which returns an `Int` count of the number of ele
 
 ### Arrays with Loops
 
-To iterate over an array without needing the index number, use a `for` loop:
+To iterate over an array without needing the index number, use a `for-in` loop:
 
 ```swift
 for Element in Array {
