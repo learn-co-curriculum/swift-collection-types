@@ -2,15 +2,15 @@
 
 ## Objectives
 
-1. Understand Swift collection types as generic collections.
+1. Understand Swift collection types.
 2. Recognize some implications of the pass-by-value nature of Swift collections.
 3. Create an explicitly-typed array.
 4. Use subscripting to interact with an array.
 5. Use a few array methods and properties to interact with an array.
 6. Create an explicitly-typed dictionary.
-7. Use subscripting to read a dictionary.
+7. Use subscripting to read from dictionary.
 8. Use subscripting to overwrite or add values for a key in a dictionary.
-9. Use the key-value Tuple returned by iterating over a dictionary with a `for-in` loop.
+9. Iterate over a dictionary with a `for-in` loop.
 
 ## Collections
 
@@ -25,21 +25,13 @@ Arrays are ordered by index; sets hold unique values; dictionaries hold unique k
 
 ### Generic Collections
 
-Since Swift is a strongly-typed language, its collection types are also "typed", meaning that they are given knowledge regarding their contents. Apple notes in the [*Collection Types* chapter](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-ID105) that its `Array`, `Set`, and `Dictionary` types "are implemented as *generic collections*."
+Since Swift is a strongly-typed language, its collection types are also "typed", meaning that they have knowledge regarding their contents. Apple notes in the [*Collection Types* chapter](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-ID105) that its `Array`, `Set`, and `Dictionary` types "are implemented as *generic collections*."
 
-Uses of the keywords `T`, `Element`, and `Item` denote a *generic*. There is no meaningful distinction between the terms and you will see all three of them in various documents, both from Apple and from answers and blogs written by outside developers.
-
-We'll discuss generics in further detail in upcoming lessons. The effect of this is that the compiler knows the types that each individual instance of a collection contains, but otherwise the collection types themselves work in exactly the same ways whether they are told that they hold `Int`s, or `String`s, or anything else.
+We'll discuss generics in further detail in upcoming lessons. The effect of this is that the compiler knows the types that each individual instance of a collection contains — Swift arrays, for instance, are specifically "arrays of `Int`s", or "arrays of `String`s", and it is an error to mismatch types of the elements. This is in contrast to the `NS` classes, which can hold any type of object.
 
 ### `let` versus `var`
 
 Collections declared using `let` are *immutable* and cannot be altered at all after they are initialized. If you wish to make a collection *mutable*, declare it with `var`. Apple recommends declaring collections with `let` as a default until you encounter the need to alter its contents, claiming that `let` allows the compiler to streamline performance if the collection never needs to be altered.
-
-### Pass-by-value
-
-Swift's collections types are passed by *value* and not by *reference*. When a collection instance is assigned to another collection instance, a copy of the instance is generated and assigned to the new instance. The effect of this is important to understand: **changes made to a collection after it is passed are not reflected in the state of the original collection.**
-
-This is true both for local instances and instances passed into functions and methods via arguments. *If you wish to preserve the mutated state of an instance that is passed-by-value, you have to assign the mutated version back to the original instance.*
 
 ## `Array`
 
@@ -331,5 +323,39 @@ Holds an `Int` value of the number of key-value pairs currently held in the dict
 #### `.isEmpty`
 
 Holds a `Bool` of whether or not the dictionary is empty; it returns `true` if the `count` is `0`("zero").
+
+
+## Pass-by-value
+
+Swift's collections types are passed by *value* and not by *reference*. When a collection is assigned to another variable or passed as an argument, *a copy* of the original collection is made. The effect of this is important to understand: **changes made to a collection after it is passed to a method or assigned to another variable are not reflected in the state of the original collection.**
+
+For instance, say you write a method that attempts to modify an array:
+
+```swift
+func addFourToArray(array: [Int]) {
+    array.append(4)
+}
+```
+
+Then, somewhere else in your code, you call this method:
+
+```swift
+var oneTwoThree = [1, 2, 3]
+addFourToArray(oneTwoThree)
+```
+
+The original array, `oneTwoThree` will **not** be modified! When it was passed as an argument to the `addFourToArray` method, it was copied, so the `append` call in that function operated on a copy. But that copy immediately disappears. This is very surprising to Objective-C developers, since collections are passed by reference in Obj-C.
+
+If you wanted the above example to work, the simplest solution is to have the function return its modified array, and assign that value back to the original variable. The method name should probably change to reflect that it returns a value:
+
+```swift
+func arrayByAddingFourToArray(array: [Int]) -> [Int] {
+    array.append(4)
+    return array
+}
+
+var oneTwoThree = [1, 2, 3]
+oneTwoThree = arrayByAddingFourToArray(oneTwoThree)
+```
 
 <a href='https://learn.co/lessons/swift-collection-types' data-visibility='hidden'>View this lesson on Learn.co</a>
