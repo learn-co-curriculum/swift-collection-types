@@ -1,16 +1,19 @@
 # Swift — Collection Types
 
+## Overview 
+
+In this lesson, we'll dive into arrays and dictionaries in Swift. 
+
 ## Objectives
 
-1. Understand Swift collection types.
-2. Recognize some implications of the pass-by-value nature of Swift collections.
-3. Create an explicitly-typed array.
-4. Use subscripting to interact with an array.
-5. Use a few array methods and properties to interact with an array.
-6. Create an explicitly-typed dictionary.
-7. Use subscripting to read from dictionary.
-8. Use subscripting to overwrite or add values for a key in a dictionary.
-9. Iterate over a dictionary with a `for-in` loop.
+1. Create an explicitly-typed array.
+2. Use subscripting to interact with an array.
+3. Use a few array methods and properties to interact with an array.
+4. Create an explicitly-typed dictionary.
+5. Use subscripting to read from dictionary.
+6. Use subscripting to overwrite or add values for a key in a dictionary.
+7. Iterate over a dictionary with a `for-in` loop.
+8. Describe the implications of the pass-by-value nature of Swift collections.
 
 ## Collections
 
